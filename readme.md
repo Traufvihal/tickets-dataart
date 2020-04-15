@@ -42,6 +42,13 @@ Then generate the connection:
 
 ![connection_0](docs/create_server_0.png "Create server step 1")
 
+The user and password for the DB:
+
+```
+ticketu
+ticketpass
+```
+
 ![connection_1](docs/create_server_1.png "Create server step 2")
 
 > It's possible to use the Docker container name instead of having to specify the IP of the running environment (since *localhost* would be the container's *localhost*) thanks to the network defined in the docker-compose file.
