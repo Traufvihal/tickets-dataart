@@ -46,3 +46,13 @@ Then generate the connection:
 
 > It's possible to use the Docker container name instead of having to specify the IP of the running environment (since *localhost* would be the container's *localhost*) thanks to the network defined in the docker-compose file.
 
+Now it's possible to verify in the DB the information loaded using the REST API.
+
+The API exposes the following endpoints (assuming the docker-compose is run on local):
+
+* `POST http://localhost:9000/tickets` create tickets
+* `GET http://localhost:9000/tickets/{id}` get tickets using the id
+* http://localhost:9000/api-docs This expose auto-generated open-api documentation
+* http://localhost:9000/swagger.html This expose Swagger UI
+
+The API can easily be used in **Postman** by importing open-api docs directly from URL.
