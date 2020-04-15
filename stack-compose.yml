@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  ticket-db:
+    container_name: ticket-db
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ticketu
+      POSTGRES_PASSWORD: ticketpass
+    ports:
+      - "5432:5432"
+    networks:
+      - ticket-network
+
+  ticket-pgadmin:
+    image: 'dpage/pgadmin4'
+    container_name: ticket-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: ticketpgpass
+      PGADMIN_DEFAULT_EMAIL: 'ssansone@dataart.com'
+    ports:
+      - "9001:80"
+    depends_on:
+      - "ticket-db"
+    networks:
+      - ticket-network
+
+  tickets-api:
+    container_name: tickets-api
+    image: tickets-api:dev
+    build:
+      context: ./tickets
+    restart: always
+    ports:
+      - "9000:8080"
+    depends_on:
+      - "ticket-db"
+      - "ticket-pgadmin"
+    networks:
+      - ticket-network
+
+networks:
+  ticket-network:
+    driver: bridge
